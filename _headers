@@ -1,0 +1,34 @@
+# Kit de nuevo ingreso · cabeceras de seguridad para Netlify o Cloudflare Pages.
+# Estos servicios no pueden ocultar carpetas: suba solo index.html y, de Base de datos, fuentes, graficos, folletos-pdf y presentaciones-pdf; omita LEEME.txt.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self'; base-uri 'none'; form-action 'none'; object-src 'none'
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000
+
+# Control de caché: index.html se revalida siempre; fuentes y gráficos por 24 horas (sin immutable).
+/index.html
+  Cache-Control: no-cache
+/
+  Cache-Control: no-cache
+/Base de datos/fuentes/*
+  Cache-Control: public, max-age=86400
+/Base de datos/graficos/*
+  Cache-Control: public, max-age=86400
+/Base de datos/folletos-pdf/*
+  Cache-Control: no-cache
+/Base de datos/presentaciones-pdf/*
+  Cache-Control: no-cache
+# Las mismas rutas con el espacio codificado, por si el servicio compara la URL sin decodificar.
+/Base%20de%20datos/fuentes/*
+  Cache-Control: public, max-age=86400
+/Base%20de%20datos/graficos/*
+  Cache-Control: public, max-age=86400
+/Base%20de%20datos/folletos-pdf/*
+  Cache-Control: no-cache
+/Base%20de%20datos/presentaciones-pdf/*
+  Cache-Control: no-cache
